@@ -393,36 +393,60 @@
       </div>
     </section>
 
+
     <!-- Fourth Section: Projects -->
     <section id="projects" class="section scrollspy">
       <h3 class="page-title white-text teal">Projects</h3>
       <div class="container">
-        <div class="row">
+        <div class="row" id="project-container">
+          <!-- The project card will be injected here by JavaScript -->
+        </div>
+      </div>
+    </section>
 
+    <script>
+      const projects = [
+        {
+          name: "Speech Emotion Recognition Model",
+          description: "An ML model to recognize emotions in speech using a Convolutional Neural Network.",
+          tools: "PyTorch, Python",
+          imageUrl: "/assets/img/speech.png",
+          repoUrl: "https://github.com/nipunshukla21/SpeechEmotionRecognition/"
+        },
+        {
+          name: "Autonomous Lawnmower",
+          description: "An autonomous lawnmower that uses a combination of sensors and actuators to navigate and mow a lawn.",
+          tools: "Arduino, C",
+          imageUrl: "/assets/img/lawnmower.webp",
+          repoUrl: "https://github.com/nipunshukla21/SpeechEmotionRecognition/"
+        }
+      ];
+
+      function loadOneProject() {
+        const projectContainer = document.querySelector('#project-container');
+
+        // Only show the first project in the array
+        const project = projects[Math.floor(Math.random() * projects.length)];
+
+        const projectCard = `
           <div class="col s12 m6 l4">
             <div class="card medium">
               <div class="card-image waves-effect waves-block waves-light">
-                <img alt="speech bubble" src="/assets/img/speech.png" style="height: 100%; width: 100%" class="activator" />
+                <img alt="${project.name}" src="${project.imageUrl}" style="height: 100%; width: 100%" class="activator" />
               </div>
               <div class="card-content">
-                <span class="card-title activator teal-text hoverline">Speech Emotion Recognition Model <i
+                <span class="card-title activator teal-text hoverline">${project.name} <i
                     class="mdi-navigation-more-vert right"></i></span>
-                <p>
-                  An ML model to recognize emotions in speech using a Convolutional Neural Network.
-                </p>
+                <p>${project.description}</p>
               </div>
               <div class="card-reveal">
-                <!-- TODO: change this -- only close button -->
-                <!-- <span class="card-title brown-text">Accomplishments<i class="mdi-navigation-close right"></i></span> -->
                 <span class="card-title grey-text"><small>Accomplishments</small><i
                     class="mdi-navigation-close right"></i></span>
                 <ul>
-                  <li><b>Tools:</b> PyTorch, Python</li>
-
-
+                  <li><b>Tools:</b> ${project.tools}</li>
                 </ul>
                 <div class="card-action">
-                  <a aria-label="Visit the GitHub repo for  project" href="https://github.com/nipunshukla21/SpeechEmotionRecognition/"
+                  <a aria-label="Visit the GitHub repo for ${project.name}" href="${project.repoUrl}"
                     target="_blank" data-position="top" data-tooltip="View Source"
                     class="btn-floating btn-large waves-effect waves-light blue-grey tooltipped"><i
                       class="fa fa-github"></i></a>
@@ -430,48 +454,16 @@
               </div>
             </div>
           </div>
+        `;
 
-          <!-- 1. Django Project -->
-          <!-- <div class="col s12 m6 l6">
-            <div class="card medium">
-              <div class="card-image waves-effect waves-block waves-light">
-                <img alt="django web app" src="/assets/img/project-library-logo.png" style="height: 100%; width: 100%" class="activator" />
-              </div>
-              <div class="card-content">
-                <span class="card-title activator teal-text hoverline">Local Library Web-App<i
-                    class="mdi-navigation-more-vert right"></i></span>
-                <p>
-                  A web-app that creates an online catalog for a small local library, where users can browse available books and manage their accounts.
-                </p>
-              </div>
-              <div class="card-reveal">
-                <span class="card-title grey-text"><small>Accomplishments</small><i
-                    class="mdi-navigation-close right"></i></span>
-                <ul>
-                  <li><b>Tools:</b> HTML, CSS, Bootstrap, SQLite, Django, Heroku</li>
-                  <li>Users can view list and detail information for books and authors.</li>
-                  <li>Admin users can create and manage models.</li>
-                  <li>Librarians can renew reserved books.</li>
+        // Inject the project card into the container
+        projectContainer.innerHTML = projectCard;
+      }
 
-                </ul>
-                <div class="card-action">
-                  <a aria-label="Visit " href="https://django-local-lib.herokuapp.com" target="_blank" data-position="top"
-                    data-tooltip="View Online"
-                    class="btn-floating btn-large waves-effect waves-light blue-grey tooltipped"><i
-                      class="fa fa-external-link"></i></a>
-                  <a aria-label="Visit the GitHub repo for  project" href="https://github.com/varadbhogayata/django-local-library"
-                    target="_blank" data-position="top" data-tooltip="View Source"
-                    class="btn-floating btn-large waves-effect waves-light blue-grey tooltipped"><i
-                      class="fa fa-github"></i></a>
-                </div>
-              </div>
-            </div>
-          </div> -->
+      // Call the function to load the single project on page load
+      document.addEventListener('DOMContentLoaded', loadOneProject);
+    </script>
 
-          <!-- ************* -->
-        </div>
-      </div>
-    </section>
 
     <!-- Fifth Section: Skills -->
     <section id="skills" class="section scrollspy">
