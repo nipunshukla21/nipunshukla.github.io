@@ -1,7 +1,7 @@
 # Personal Portfolio ⚡️ 
 > A clean, beautiful, responsive portfolio template for Software Developers!
 
-> https://nipunshukla.github.io
+> https://nipunshukla21.github.io
 
 This repository is a clone of https://github.com/varadbhogayata/varadbhogayata.github.io
 
