@@ -399,76 +399,86 @@
       <h3 class="page-title white-text teal">Projects</h3>
       <div class="container">
         <div class="row" id="project-container">
-          <!-- The project card will be injected here by JavaScript -->
+          <!-- The project cards will be injected here by JavaScript -->
+        </div>
+        <div class="row center">
+          <button id="load-more" class="btn waves-effect waves-light teal">Load More</button>
         </div>
       </div>
     </section>
-
+    
     <script>
       const projects = [
-        {
-          name: "Speech Emotion Recognition Model",
-          description: "An ML model to recognize emotions in speech using a Convolutional Neural Network.",
-          tools: "PyTorch, Python",
-          imageUrl: "/assets/img/speech.png",
-          repoUrl: "https://github.com/nipunshukla21/SpeechEmotionRecognition/",
-          date: new Date('2023-05-01')
-        },
-        {
-          name: "Autonomous Lawnmower",
-          description: "An autonomous lawnmower that uses a combination of sensors and actuators to navigate and mow a lawn.",
-          tools: "Arduino, C",
-          imageUrl: "/assets/img/lawnmower.webp",
-          repoUrl: "https://github.com/nipunshukla21/SpeechEmotionRecognition/",
-          date: new Date('2020-06-01')
-        }
-      ];
+  {
+    name: "Speech Emotion Recognition Model",
+    description: "An ML model to recognize emotions in speech using a Convolutional Neural Network.",
+    tools: "PyTorch, Python",
+    imageUrl: "/assets/img/speech.png",
+    repoUrl: "https://github.com/nipunshukla21/SpeechEmotionRecognition/",
+    date: new Date('2023-05-01')
+  },
+  {
+    name: "Autonomous Lawnmower",
+    description: "An autonomous lawnmower that uses a combination of sensors and actuators to navigate and mow a lawn.",
+    tools: "Arduino, C",
+    imageUrl: "/assets/img/lawnmower.webp",
+    repoUrl: "https://github.com/nipunshukla21/SpeechEmotionRecognition/",
+    date: new Date('2020-06-01')
+  },
+];
 
-      function loadOneProject() {
-        const projectContainer = document.querySelector('#project-container');
+let currentProjectIndex = 0;
 
-        let project = projects[0];
+function loadOneProject() {
+  const projectContainer = document.querySelector('#project-container');
+  
+  if (currentProjectIndex < projects.length) {
+    const project = projects[currentProjectIndex];
 
-        for (let projectCheck of projects) {
-          if (projectCheck.date > project.date) {
-            project = projectCheck;
-          }
-        }
-
-        const projectCard = `
-          <div class="col s12 m6 l4">
-            <div class="card medium">
-              <div class="card-image waves-effect waves-block waves-light">
-                <img alt="${project.name}" src="${project.imageUrl}" style="height: 100%; width: 100%" class="activator" />
-              </div>
-              <div class="card-content">
-                <span class="card-title activator teal-text hoverline">${project.name} <i
-                    class="mdi-navigation-more-vert right"></i></span>
-                <p>${project.description}</p>
-              </div>
-              <div class="card-reveal">
-                <span class="card-title grey-text"><small>Accomplishments</small><i
-                    class="mdi-navigation-close right"></i></span>
-                <ul>
-                  <li><b>Tools:</b> ${project.tools}</li>
-                </ul>
-                <div class="card-action">
-                  <a aria-label="Visit the GitHub repo for ${project.name}" href="${project.repoUrl}"
-                    target="_blank" data-position="top" data-tooltip="View Source"
-                    class="btn-floating btn-large waves-effect waves-light blue-grey tooltipped"><i
-                      class="fa fa-github"></i></a>
-                </div>
-              </div>
+    const projectCard = `
+      <div class="col s12 m6 l4">
+        <div class="card medium">
+          <div class="card-image waves-effect waves-block waves-light">
+            <img alt="${project.name}" src="${project.imageUrl}" style="height: 100%; width: 100%" class="activator" />
+          </div>
+          <div class="card-content">
+            <span class="card-title activator teal-text hoverline">${project.name} <i
+                class="mdi-navigation-more-vert right"></i></span>
+            <p>${project.description}</p>
+          </div>
+          <div class="card-reveal">
+            <span class="card-title grey-text"><small>Accomplishments</small><i
+                class="mdi-navigation-close right"></i></span>
+            <ul>
+              <li><b>Tools:</b> ${project.tools}</li>
+            </ul>
+            <div class="card-action">
+              <a aria-label="Visit the GitHub repo for ${project.name}" href="${project.repoUrl}"
+                target="_blank" data-position="top" data-tooltip="View Source"
+                class="btn-floating btn-large waves-effect waves-light blue-grey tooltipped"><i
+                  class="fa fa-github"></i></a>
             </div>
           </div>
-        `;
+        </div>
+      </div>
+    `;
 
-        // Inject the project card into the container
-        projectContainer.innerHTML = projectCard;
-      }
+    projectContainer.innerHTML += projectCard; // Append the new project card
+    currentProjectIndex++; // Increment the index for the next project
 
-      // Call the function to load the single project on page load
-      document.addEventListener('DOMContentLoaded', loadOneProject);
+    // Hide the button if all projects are loaded
+    if (currentProjectIndex >= projects.length) {
+      document.getElementById('load-more').style.display = 'none';
+    }
+  }
+}
+
+      document.addEventListener('DOMContentLoaded', () => {
+        loadOneProject(); // Load the first project on page load
+      });
+
+      document.getElementById('load-more').addEventListener('click', loadOneProject); // Load more projects on button click
+
     </script>
 
 
