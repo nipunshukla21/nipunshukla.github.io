@@ -411,22 +411,29 @@
           description: "An ML model to recognize emotions in speech using a Convolutional Neural Network.",
           tools: "PyTorch, Python",
           imageUrl: "/assets/img/speech.png",
-          repoUrl: "https://github.com/nipunshukla21/SpeechEmotionRecognition/"
+          repoUrl: "https://github.com/nipunshukla21/SpeechEmotionRecognition/",
+          date: new Date('2023-05-01')
         },
         {
           name: "Autonomous Lawnmower",
           description: "An autonomous lawnmower that uses a combination of sensors and actuators to navigate and mow a lawn.",
           tools: "Arduino, C",
           imageUrl: "/assets/img/lawnmower.webp",
-          repoUrl: "https://github.com/nipunshukla21/SpeechEmotionRecognition/"
+          repoUrl: "https://github.com/nipunshukla21/SpeechEmotionRecognition/",
+          date: new Date('2020-06-01')
         }
       ];
 
       function loadOneProject() {
         const projectContainer = document.querySelector('#project-container');
 
-        // Only show the first project in the array
-        const project = projects[Math.floor(Math.random() * projects.length)];
+        let project = projects[0];
+
+        for (let projectCheck of projects) {
+          if (projectCheck.date > project.date) {
+            project = projectCheck;
+          }
+        }
 
         const projectCard = `
           <div class="col s12 m6 l4">
